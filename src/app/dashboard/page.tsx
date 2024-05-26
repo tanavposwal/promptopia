@@ -8,6 +8,8 @@ import db from "@/db/db";
 export default async function New() {
     const session = await auth()
 
+  if (!session) return <div>Not authenticated</div>
+
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-4xl font-black">Dashboard</h1>
@@ -20,7 +22,7 @@ export default async function New() {
         </div>
       </div>
       <hr />
-      <div className="flex flex-col max-w-xl  gap-2 my-4">
+      <div className="flex flex-col max-w-xl  gap-2 my-4 opacity-85">
         <form action={async (formData: FormData) => {
             'use server';
             const session = await auth();

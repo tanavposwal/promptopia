@@ -1,13 +1,14 @@
 import { auth } from "@/auth";
-import CreateBtn from "@/components/button/Create";
-import { Button } from "@/components/ui/button";
+import FormBtn from "@/components/button/FormBtn";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import db from "@/db/db";
 
 export default async function New() {
-    const session = await auth();
+  const session = await auth()
+
+  if (!session) return <div>Not authenticated</div>
 
   return (
     <div className="flex flex-col gap-4">
@@ -39,7 +40,7 @@ export default async function New() {
             by {session?.user?.name}
         </div>
         <div>
-            <CreateBtn />
+            <FormBtn text="Create" />
         </div>
       </form>
     </div>

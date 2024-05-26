@@ -10,6 +10,9 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import Avatar from "boring-avatars";
+import FormBtn from "./button/FormBtn";
+import { UserCircleIcon } from "@heroicons/react/24/solid";
+
 
 export function SignIn() {
   return (
@@ -41,9 +44,7 @@ export function SignIn() {
             </div>
           </div>
           <div className="w-full flex justify-end">
-            <Button type="submit" size={"lg"}>
-              Login
-            </Button>
+            <FormBtn text="Login" />
           </div>
         </form>
       </DialogContent>
@@ -78,5 +79,5 @@ export async function UserImage() {
       />
     );
 
-  return "";
+  return <UserCircleIcon className="w-10 h-10 text-muted-foreground" />;
 }

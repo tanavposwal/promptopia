@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster"
 
+import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
 
@@ -28,8 +30,15 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
+         <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+          >
         <Navbar />
         <div className="max-w-screen-xl mx-auto pt-24">{children}</div>
+        <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

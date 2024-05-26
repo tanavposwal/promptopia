@@ -35,7 +35,7 @@ export default async function Navbar() {
         {session?.user ? (
           <div className="flex gap-3 items-center">
             <Button variant="ghost" asChild>
-              <Link href="/new">Create a prompt</Link>
+              <Link href="/new">Create a new prompt</Link>
             </Button>
 
             <DropdownMenu>

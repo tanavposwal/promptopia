@@ -1,16 +1,22 @@
+import Feed from "@/components/Feed";
 import { ArrowDownIcon } from "@heroicons/react/24/solid";
+import { Suspense } from "react";
 
-export default async function Home() {
+
+
+export default function Home() {
+
   return (
     <main>
       <section className="relative flex flex-col items-center justify-center h-[80vh]">
-        <div className="absolute rounded-full mix-blend-multiply filter blur-3xl top-16 right-50 w-80 h-80 bg-yellow-500 opacity-20" />
-        <div className="absolute rounded-full mix-blend-multiply filter blur-3xl top-64 right-96 w-72 h-72 bg-indigo-500 opacity-20" />
-        <div className="absolute rounded-full mix-blend-multiply filter blur-3xl bottom-24 left-56 w-96 h-96 bg-pink-500 opacity-20" />
+      <div className="absolute h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] -z-10 dark:opacity-20"></div>
+        <div className="absolute rounded-full filter blur-3xl top-16 right-50 w-80 h-80 bg-yellow-500 opacity-20 -z-10" />
+        <div className="absolute rounded-full filter blur-3xl top-64 right-96 w-72 h-72 bg-indigo-500 opacity-20 -z-10" />
+        <div className="absolute rounded-full filter blur-3xl bottom-24 left-56 w-96 h-96 bg-pink-500 opacity-20 -z-10" />
 
         <div className="flex flex-col items-center justify-center">
-          <h1 className="text-7xl font-black">Discover & Share</h1>
-          <h1 className="text-7xl font-black bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-400 inline-block text-transparent bg-clip-text">
+          <h1 className="text-8xl font-black">Discover & Share</h1>
+          <h1 className="text-8xl font-black bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-400 inline-block text-transparent bg-clip-text">
             AI-Powered Prompts
           </h1>
           <p className="desc text-center mt-8 text-md text-muted-foreground max-w-lg font-medium">
@@ -23,14 +29,12 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      <section className="w-full pb-32 flex items-center">
-        <div className="w-full px-24 py-3 flex items-center justify-center">
-          <input type="text" className="w-9/12 px-4 py-3 border rounded-xl shadow-lg" placeholder="Search for a title or tag or username" />
-        </div>
-        <div>
-
-        </div>
+      <section className="w-full pb-32 flex flex-col">
+      <Suspense fallback={<p>Loading feed...</p>}>
+        <Feed />
+      </Suspense>
       </section>
     </main>
   );
 }
+
