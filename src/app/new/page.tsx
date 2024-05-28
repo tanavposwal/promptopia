@@ -4,43 +4,61 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import db from "@/db/db";
+import { redirect } from "next/navigation";
 
 export default async function New() {
-  const session = await auth()
+  const session = await auth();
 
-  if (!session) return <div>Not authenticated</div>
+  if (!session) return <div>Not authenticated</div>;
 
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-4xl font-black">New Prompt</h1>
       <hr />
-      <form className="flex flex-col gap-3 max-w-lg mt-5" action={async (formData: FormData) => {
-        "use server";
+      <form
+        className="flex flex-col gap-3 max-w-lg mt-5"
+        action={async (formData: FormData) => {
+          "use server";
 
-        const title = formData.get("title") as string
-        const content = formData.get("prompt") as string
+          const title = formData.get("title") as string;
+          const content = formData.get("prompt") as string;
 
-        await db.prompt.create({
-            data: {
+          if (title != "" && content != "") {
+            await db.prompt.create({
+              data: {
                 title,
                 content,
-                authorId: session?.user?.id!
-            }
-        })
-      }}>
+                authorId: session?.user?.id!,
+              },
+            });
+
+            redirect('/')
+          }
+          return "Enter to create"
+        }}
+      >
         <div>
           <Label htmlFor="title">Title</Label>
-          <Input type="text" id="title" placeholder="Title" name="title" />
+          <Input
+            type="text"
+            id="title"
+            required
+            placeholder="Title"
+            name="title"
+          />
         </div>
         <div>
           <Label htmlFor="prompt">Prompt</Label>
-          <Textarea id="prompt" placeholder="Type your message here." name="prompt" />
+          <Textarea
+            id="prompt"
+            required
+            placeholder="Type your message here."
+            name="prompt"
+          />
         </div>
-        <div className="text-muted-foreground">
-            by {session?.user?.name}
-        </div>
+        <div className="text-muted-foreground">by {session?.user?.name}</div>
         <div>
-            <FormBtn text="Create" />
+          <FormBtn text="Create" />
         </div>
       </form>
     </div>

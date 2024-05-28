@@ -1,9 +1,12 @@
 import { auth } from "@/auth";
 import { UserImage } from "@/components/Auth";
+import MyPrompts from "@/components/MyPrompts";
+import Prompt from "@/components/skeleton/Prompt";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import db from "@/db/db";
+import { Suspense } from "react";
 
 export default async function New() {
     const session = await auth()
@@ -20,6 +23,15 @@ export default async function New() {
         <h2 className="text-lg font-bold">{session?.user?.name}</h2>
         <h3>{session?.user?.email}</h3>
         </div>
+      </div>
+      <hr />
+      <div className="my-4 opacity-85">
+      <h2 className="text-lg font-bold">My Prompts</h2>
+      <div>
+      <Suspense fallback={<Prompt />}>
+        <MyPrompts />
+      </Suspense>
+      </div>
       </div>
       <hr />
       <div className="flex flex-col max-w-xl  gap-2 my-4 opacity-85">

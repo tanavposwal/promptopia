@@ -1,12 +1,10 @@
 import NextAuth from "next-auth"
 import Resend from "next-auth/providers/resend"
 import { PrismaAdapter } from "@auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client"
-
-const prisma = new PrismaClient()
+import db from "./db/db"
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(db),
   providers: [Resend({
     from: "no-reply@resend.dev"
   })],

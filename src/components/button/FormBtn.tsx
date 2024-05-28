@@ -8,7 +8,9 @@ export default function FormBtn({ text }: { text: string }) {
     const { pending } = useFormStatus()
 
     return (
-        <Button type="submit" disabled={pending}>
+        <Button type="submit" disabled={pending} onClick={() => {
+            console.log(pending)
+        }}>
             {pending && <ReloadIcon className="mr-2 h-3 w-3 animate-spin" />}{text}</Button>
     )
 }

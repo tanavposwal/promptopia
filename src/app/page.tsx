@@ -1,11 +1,14 @@
 import Feed from "@/components/Feed";
+import SearchBox from "@/components/SearchBox";
+import Prompt from "@/components/skeleton/Prompt";
 import { ArrowDownIcon } from "@heroicons/react/24/solid";
 import { Suspense } from "react";
 
-
-
-export default function Home() {
-
+export default function Home({
+  searchParams,
+}: {
+  searchParams: { s: string }
+}) {
   return (
     <main>
       <section className="relative flex flex-col items-center justify-center h-[80vh]">
@@ -30,8 +33,9 @@ export default function Home() {
         </div>
       </section>
       <section className="w-full pb-32 flex flex-col">
-      <Suspense fallback={<p>Loading feed...</p>}>
-        <Feed />
+      <SearchBox />
+      <Suspense fallback={<Prompt />}>
+        <Feed s={searchParams.s} />
       </Suspense>
       </section>
     </main>
