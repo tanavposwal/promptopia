@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/*": {
-      "runtime": "edge"
+      "runtime": "nodejs"
     }
   }
 }
